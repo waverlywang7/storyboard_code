@@ -14,9 +14,11 @@ def images_to_pdf(folder_path):
     base_name = os.path.basename(folder_path)
     base_name = re.split(r"\.\s*", base_name)[0]
     # Get a list of filenames
-    filenames = sorted(listdir(folder_path))
+    #filenames = sorted(listdir(folder_path))
+    filenames = listdir(folder_path)
+    filenames.remove(".DS_Store")
+    filenames.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
     print(filenames)
-
     images = [
         Image.open(os.path.join(folder_path, f))
         for f in filenames
